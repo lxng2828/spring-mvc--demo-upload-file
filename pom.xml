@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>app</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <name>app</name>
+    <description>Spring MVC, Java 11</description>
+
+    <properties>
+        <java.version>11</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+
+        <!-- 🧱 Thư viện chuẩn Servlet API (Java EE) -->
+        <!-- Cung cấp các interface như HttpServletRequest, HttpServletResponse, ServletContext... -->
+        <!-- scope "provided": container (Tomcat, Jetty...) sẽ cung cấp, không đóng gói vào WAR -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- 🌱 Spring Web MVC Core -->
+        <!-- Cung cấp DispatcherServlet, Controller, Data Binding, Validator, Multipart hỗ trợ -->
+        <!-- Đây là cốt lõi để viết ứng dụng web theo mô hình MVC với Spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>5.3.36</version>
+        </dependency>
+
+        <!-- 🌐 Spring Web (khuyến nghị thêm) -->
+        <!-- Chứa các class như StandardServletMultipartResolver, WebUtils... -->
+        <!-- Là phụ thuộc transit từ spring-webmvc, nhưng khai báo rõ giúp tránh lỗi IntelliJ không resolve được -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>5.3.36</version>
+        </dependency>
+
+        <!-- 🖼️ Thymeleaf Template Engine hỗ trợ Spring -->
+        <!-- Cho phép binding dữ liệu giữa View (.html) và Model trong Spring MVC -->
+        <!-- Cung cấp th:object, th:field, th:if... giúp tạo form tương tác dễ dàng -->
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf-spring5</artifactId>
+            <version>3.1.2.RELEASE</version>
+        </dependency>
+
+        <!-- 📂 Apache Commons FileUpload -->
+        <!-- Hỗ trợ xử lý multipart/form-data khi upload file -->
+        <!-- Kết hợp cùng với MultipartResolver trong Spring để xử lý file upload -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.5</version>
+        </dependency>
+
+    </dependencies>
+
+
+    <build>
+        <finalName>app</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
